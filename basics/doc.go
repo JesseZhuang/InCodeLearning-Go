@@ -1,2 +1,2 @@
-// golang official tour https://tour.golang.org
+// golang official tour https://tour.golang.org basics section
 package main
