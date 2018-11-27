@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math"
 	"math/cmplx"
+	"strings"
 	"unsafe"
 )
 
@@ -139,8 +140,88 @@ func demoSlice() {
 	printSlice(c)
 	d := c[2:5]
 	printSlice(d)
+
+	s = make([]int, 0)
+	printSlice(s)
+
+	// append works on nil slices.
+	s = append(s, 0)
+	printSlice(s)
+	// The slice grows as needed.
+	s = append(s, 1)
+	printSlice(s)
+	// We can add more than one element at a time.
+	s = append(s, 2, 3, 4)
+	printSlice(s)
 }
 
 func printSlice(s []int) {
 	fmt.Printf("len=%d cap=%d %v\n", len(s), cap(s), s)
+}
+
+func ticTacToe() {
+	board := [][]string{
+		[]string{"_", "_", "_"},
+		[]string{"_", "_", "_"},
+		[]string{"_", "_", "_"},
+	}
+
+	// The players take turns.
+	board[0][0] = "X"
+	board[2][2] = "O"
+	board[1][2] = "X"
+	board[1][0] = "O"
+	board[0][2] = "X"
+
+	for i := 0; i < len(board); i++ {
+		fmt.Printf("%s\n", strings.Join(board[i], " "))
+	}
+}
+
+func demoRange() {
+	pow := make([]int, 10)
+	for i := range pow {
+		pow[i] = 1 << uint(i) // == 2**i
+	}
+	for _, value := range pow {
+		fmt.Printf("%d\n", value)
+	}
+}
+
+func demoMap() {
+	var m1 map[string]vertex
+	m1 = make(map[string]vertex)
+	m1["Bell Labs"] = vertex{
+		40, -74,
+	}
+	fmt.Println(m1)
+	m1 = map[string]vertex{
+		"bell labs": vertex{1, 2},
+		"google":    vertex{3, 4},
+	}
+	fmt.Println(m1)
+	m2 := make(map[string]int)
+	m2["Answer"] = 42
+	fmt.Println("The value:", m2["Answer"])
+	m2["Answer"] = 48
+	fmt.Println("The value:", m2["Answer"])
+	delete(m2, "Answer")
+	fmt.Println("The value:", m2["Answer"])
+	var (
+		v  int
+		ok bool
+	)
+	v, ok = m2["Answer"]
+	fmt.Println("The value:", v, "Present?", ok)
+	v2, ok2 := m2["Answer"]
+	fmt.Println("The value:", v2, "Present?", ok2)
+}
+
+func wordCount(s string) map[string]int {
+	m := make(map[string]int)
+	strings := strings.Fields(s)
+	for _, word := range strings {
+		m[word]++
+	}
+	return m
 }

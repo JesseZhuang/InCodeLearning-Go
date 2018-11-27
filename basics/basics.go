@@ -95,4 +95,22 @@ func main() {
 
 	printSeparator()
 	demoSlice()
+
+	printSeparator()
+	ticTacToe()
+
+	printSeparator()
+	demoRange()
+
+	printSeparator()
+	demoMap()
+
+	printSeparator()
+	fmt.Println(wordCount("I ate a donut. Then I ate another donut."))
+
+	printSeparator()
+	demoFunction()
+
+	printSeparator()
+	demoClosure()
 }
