@@ -79,3 +79,23 @@ func demoClosure() {
 		)
 	}
 }
+
+// fibonacci is a function that returns a function that returns an int.
+func fibonacci() func(int) int {
+	f := make([]int, 0)
+	f = append(f, 0, 1)
+	return func(i int) int {
+		for j := len(f); len(f) < i+1; j++ {
+			f = append(f, f[j-1]+f[j-2])
+			fmt.Println(f)
+		}
+		return f[i]
+	}
+}
+
+func demoFibonacci() {
+	f := fibonacci()
+	for i := 12; i >= 0; i-- {
+		fmt.Println(i, f(i))
+	}
+}

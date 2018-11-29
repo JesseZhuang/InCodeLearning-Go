@@ -113,4 +113,7 @@ func main() {
 
 	printSeparator()
 	demoClosure()
+
+	printSeparator()
+	demoFibonacci()
 }
